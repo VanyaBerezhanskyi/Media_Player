@@ -1,0 +1,10 @@
+<Solution>
+  <Configurations>
+    <Platform Name="ARM64" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="Media_Player/Media_Player.vcxproj" Id="1a9a08e2-49b7-4c1c-9e28-62864a8c2de8">
+    <Deploy />
+  </Project>
+</Solution>
