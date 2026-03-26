@@ -1,21 +1,38 @@
 #pragma once
 
-#include <windows.h>
 #include <mfapi.h>
 #include <mfidl.h>
-#include <mfobjects.h>
 #include <mfreadwrite.h>
-#include <wrl/client.h>
+#include <wrl.h>
+
+using Microsoft::WRL::ComPtr;
+
+enum class FrameType
+{
+    Video,
+    Audio
+};
+
+struct Frame
+{
+    FrameType type;
+    BYTE* data;
+    UINT size;
+    LONGLONG timestamp;
+};
 
 class MediaDecoder
 {
 public:
-    MediaDecoder();
-    ~MediaDecoder();
 
-    bool openFile(const wchar_t* path);
-    void readSample();
+    void Initialize();
+    void CleanUp();
+
+    bool OpenFile(const wchar_t* path);
+
+    bool ReadSample(Frame& frame);
 
 private:
-    ::Microsoft::WRL::ComPtr<IMFSourceReader> reader;
+
+    ComPtr<IMFSourceReader> reader;
 };

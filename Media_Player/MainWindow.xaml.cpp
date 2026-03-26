@@ -4,7 +4,9 @@
 #include "MainWindow.g.cpp"
 #endif
 
-#include "MediaDecoder.h"
+#include "PlayerEngine.h"
+#include <string>
+#include <windows.h>
 
 using namespace winrt;
 using namespace winrt::Microsoft::UI::Xaml;
@@ -14,11 +16,11 @@ using namespace winrt::Microsoft::UI::Xaml;
 
 namespace winrt::Media_Player::implementation
 {
+    PlayerEngine player;
+
     void MainWindow::OnOpenFile(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& args)
     {
-        MediaDecoder decoder;
-
-        decoder.openFile(L"C:\\video.mp4");
+        assert(player.Open(L"files\\video.mp4"));
     }
 
     void MainWindow::OnPlayPause(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& args)

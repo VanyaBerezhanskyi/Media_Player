@@ -5,18 +5,19 @@
 #pragma comment(lib, "mfplat.lib")
 #pragma comment(lib, "mfreadwrite.lib")
 #pragma comment(lib, "mfuuid.lib")
+#pragma comment(lib, "mf.lib")
 
-MediaDecoder::MediaDecoder()
+void MediaDecoder::Initialize()
 {
     MFStartup(MF_VERSION);
 }
 
-MediaDecoder::~MediaDecoder()
+void MediaDecoder::CleanUp()
 {
     MFShutdown();
 }
 
-bool MediaDecoder::openFile(const wchar_t* path)
+bool MediaDecoder::OpenFile(const wchar_t* path)
 {
     HRESULT hr = MFCreateSourceReaderFromURL(path, nullptr, &reader);
 
@@ -53,13 +54,13 @@ bool MediaDecoder::openFile(const wchar_t* path)
     return true;
 }
 
-void MediaDecoder::readSample()
+bool MediaDecoder::ReadSample(Frame& frame)
 {
     DWORD streamIndex, flags;
     LONGLONG timestamp;
     Microsoft::WRL::ComPtr<IMFSample> sample;
 
-    reader->ReadSample(
+    HRESULT  hr = reader->ReadSample(
         MF_SOURCE_READER_FIRST_VIDEO_STREAM,
         0,
         &streamIndex,
@@ -67,4 +68,38 @@ void MediaDecoder::readSample()
         &timestamp,
         &sample
     );
+
+    if (FAILED(hr))
+        return false;
+
+    if (flags & MF_SOURCE_READERF_ENDOFSTREAM)
+        return false;
+
+    if (!sample)
+        return false;
+
+    ComPtr<IMFMediaBuffer> buffer;
+
+    sample->ConvertToContiguousBuffer(&buffer);
+
+    BYTE* data{};
+    DWORD maxLen;
+    DWORD curLen;
+
+    buffer->Lock(&data, &maxLen, &curLen);
+
+    frame.data = new BYTE[curLen];
+
+    memcpy(frame.data, data, curLen);
+
+    frame.size = curLen;
+
+    buffer->Unlock();
+
+    if (streamIndex == MF_SOURCE_READER_FIRST_VIDEO_STREAM)
+        frame.type = FrameType::Video;
+    else
+        frame.type = FrameType::Audio;
+
+    return true;
 }
