@@ -58,7 +58,7 @@ void DX11Renderer::Render(Frame& frame)
     D3D11_MAPPED_SUBRESOURCE mapped;
 
     context->Map(
-        frameTexture,
+        frameTexture.Get(),
         0,
         D3D11_MAP_WRITE_DISCARD,
         0,
@@ -71,5 +71,5 @@ void DX11Renderer::Render(Frame& frame)
         frame.size
     );
 
-    context->Unmap(frameTexture, 0);
+    context->Unmap(frameTexture.Get(), 0);
 }
