@@ -9,10 +9,12 @@ public:
 
     PlayerEngine();
 
-    bool Open(const wchar_t* file);
+    bool OpenFile(const wchar_t* file);
 
     void Play();
     void Pause();
+
+    void ClenUp();
 
 private:
 

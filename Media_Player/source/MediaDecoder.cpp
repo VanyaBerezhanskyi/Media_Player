@@ -1,4 +1,5 @@
 #include "pch.h"
+#include <mfapi.h>
 #include "MediaDecoder.h"
 
 // Link Media Foundation libraries required for symbols used in this unit

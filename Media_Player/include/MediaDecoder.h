@@ -1,6 +1,5 @@
 #pragma once
 
-#include <mfapi.h>
 #include <mfidl.h>
 #include <mfreadwrite.h>
 #include <wrl/client.h>
@@ -32,5 +31,5 @@ public:
 
 private:
 
-    IMFSourceReader* reader = nullptr;
+    Microsoft::WRL::ComPtr<IMFSourceReader> reader = nullptr;
 };

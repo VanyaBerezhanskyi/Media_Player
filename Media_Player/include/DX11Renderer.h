@@ -1,4 +1,3 @@
-#include <Windows.h>    
 #include <d3d11.h>       
 #include <wrl/client.h> 
 #include "MediaDecoder.h"
@@ -13,8 +12,8 @@ public:
 
 private:
 
-    ID3D11Device* device = nullptr;
-    ID3D11DeviceContext* context = nullptr;
-    IDXGISwapChain* swapChain = nullptr;
-    ID3D11Texture2D* frameTexture = nullptr;
+    Microsoft::WRL::ComPtr<ID3D11Device> device = nullptr;
+    Microsoft::WRL::ComPtr<ID3D11DeviceContext> context = nullptr;
+    Microsoft::WRL::ComPtr<IDXGISwapChain> swapChain = nullptr;
+    Microsoft::WRL::ComPtr<ID3D11Texture2D> frameTexture = nullptr;
 };

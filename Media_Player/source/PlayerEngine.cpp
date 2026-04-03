@@ -4,9 +4,10 @@
 PlayerEngine::PlayerEngine()
 {
     decoder.Initialize();
+    // renderer.Iniitialize();
 }
 
-bool PlayerEngine::Open(const wchar_t* path)
+bool PlayerEngine::OpenFile(const wchar_t* path)
 {
     return decoder.OpenFile(path);
 }
@@ -34,4 +35,9 @@ void PlayerEngine::Play()
 void PlayerEngine::Pause()
 {
     playing = false;
+}
+
+void PlayerEngine::ClenUp()
+{
+    decoder.CleanUp();
 }
