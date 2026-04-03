@@ -1,6 +1,7 @@
 #pragma once
 
 #include "MediaDecoder.h"
+#include "DX11Renderer.h"
 
 class PlayerEngine
 {
@@ -16,6 +17,7 @@ public:
 private:
 
     MediaDecoder decoder;
+    DX11Renderer renderer;
 
     bool playing = false;
 };

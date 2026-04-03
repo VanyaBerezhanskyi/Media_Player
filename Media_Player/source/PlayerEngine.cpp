@@ -17,7 +17,17 @@ void PlayerEngine::Play()
 
     while (playing)
     {
-        
+        Frame frame;
+
+        while (decoder.ReadSample(frame))
+        {
+            if (frame.type == FrameType::Video)
+            {
+                renderer.Render(frame);
+            }
+
+            delete[] frame.data;
+        }
     }
 }
 

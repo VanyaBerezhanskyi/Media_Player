@@ -5,7 +5,6 @@
 #endif
 
 #include "PlayerEngine.h"
-#include <string>
 #include <windows.h>
 
 using namespace winrt;
@@ -20,7 +19,9 @@ namespace winrt::Media_Player::implementation
 
     void MainWindow::OnOpenFile(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& args)
     {
-        assert(player.Open(L"files\\video.mp4"));
+        bool isOpen = player.Open(L"C:/Users/vanec/Media_Player/Media_Player/files/video.mp4");
+
+        assert(isOpen);
     }
 
     void MainWindow::OnPlayPause(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& args)

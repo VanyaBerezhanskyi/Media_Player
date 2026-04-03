@@ -3,9 +3,7 @@
 #include <mfapi.h>
 #include <mfidl.h>
 #include <mfreadwrite.h>
-#include <wrl.h>
-
-using Microsoft::WRL::ComPtr;
+#include <wrl/client.h>
 
 enum class FrameType
 {
@@ -34,5 +32,5 @@ public:
 
 private:
 
-    ComPtr<IMFSourceReader> reader;
+    IMFSourceReader* reader = nullptr;
 };

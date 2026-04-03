@@ -78,7 +78,7 @@ bool MediaDecoder::ReadSample(Frame& frame)
     if (!sample)
         return false;
 
-    ComPtr<IMFMediaBuffer> buffer;
+    Microsoft::WRL::ComPtr<IMFMediaBuffer> buffer;
 
     sample->ConvertToContiguousBuffer(&buffer);
 

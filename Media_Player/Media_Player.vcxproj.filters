@@ -14,11 +14,13 @@
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
     <ClCompile Include="source\MediaDecoder.cpp" />
     <ClCompile Include="source\PlayerEngine.cpp" />
+    <ClCompile Include="source\DX11Renderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
     <ClInclude Include="include\MediaDecoder.h" />
     <ClInclude Include="include\PlayerEngine.h" />
+    <ClInclude Include="include\DX11Renderer.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Wide310x150Logo.scale-200.png">
